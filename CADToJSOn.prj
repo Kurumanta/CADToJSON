@@ -1,0 +1,16 @@
+;;; VLisp project file [V2.0] CADToJSOn saved to:[e:\02_Tasking\04_VsCode\00_AutoLISP\CadToJSON\CADToJSON] at:[9/29/2025]
+(VLISP-PROJECT-LIST 
+  :NAME
+  CADToJSOn
+  :OWN-LIST
+  ("JSONout_edited_ToggleoffDelimit" "Original")
+  :FAS-DIRECTORY
+  nil
+  :TMP-DIRECTORY
+  nil
+  :PROJECT-KEYS
+  (:BUILD (:standard))
+  :CONTEXT-ID
+  :AUTOLISP
+)
+;;; EOF

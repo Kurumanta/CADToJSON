@@ -1,0 +1,36 @@
+[{"EntName":"2D8"},{"EntType":"BLOCK"},{"330":"25C"},{"EntHandle":"2D8"},{"SubClass":"AcDbEntity"},{"EntSpace":0},{"Layer":"0"},{"SubClass":"AcDbBlockBegin"},{"Modes":0},["RefPoint",0.000000000000000,0.000000000000000,0.000000000000000],{"EntNameRef":"2D9"},{"ObjName":"Cua"},{"TextString":""}]
+
+((-1 . <Entity name: 2cf4b78b180>) (0 . BLOCK) (330 . <Entity name: 2cf4efc9140>) (5 . 2D8) (100 . AcDbEntity) (67 . 0) (8 . 0) (100 . AcDbBlockBegin) (70 . 0) (10 0.0 0.0 0.0) (-2 . <Entity name: 2cf4b78b190>) (2 . Cua) (1 . ))
+
+Các thông tin có thể thu thập:
+
+# JSON Parsed out của 1 LWPOLYLINE
+
+[{"EntName":"8C8"},{"EntType":"LWPOLYLINE"},{"EntHandle":"8C8"},{"AppGroup":"{ACAD_REACTORS"},{"330":"8CF"},{"330":"8D0"},{"330":"8D1"},{"330":"8D2"},{"330":"8D3"},{"330":"8D4"},{"330":"8D5"},{"330":"8D6"},{"330":"8D7"},{"330":"8D8"},{"AppGroup":"}"},{"330":"1F"},{"SubClass":"AcDbEntity"},{"EntSpace":0},{"Layout":"Model"},{"Layer":"0"},{"SubClass":"AcDbPolyline"},{"BgFill":11},{"Modes":0},{"ScaleZ":0.000000000000000},{"Elevation":0.000000000000000},{"Thickness":0.000000000000000},["RefPoint",866.6070950460436,143.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":1},["RefPoint",1711.699346848736,143.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":1.000000000000000},{"Rows_ClipNodes_LdCol":2},["RefPoint",1711.699346848736,193.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":3},["RefPoint",1411.699346848736,193.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":4},["RefPoint",1411.699346848736,373.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":-1.000000000000000},{"Rows_ClipNodes_LdCol":5},["RefPoint",1561.699346848736,373.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":1.000000000000000},{"Rows_ClipNodes_LdCol":6},["RefPoint",1711.699346848736,373.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":-1.000000000000000},{"Rows_ClipNodes_LdCol":7},["RefPoint",1861.699346848736,373.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":8},["RefPoint",1861.699346848736,-126.0114904472098],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":9},["RefPoint",866.6070950460436,-126.0114904472098],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":10},["RefPoint",866.6070950460436,143.9885095527902],{"Size":0.000000000000000},{"ScaleX_StartA":0.000000000000000},{"ScaleY_EndA":0.000000000000000},{"Rows_ClipNodes_LdCol":11},["ExtrusionVec",0.000000000000000,0.000000000000000,1.000000000000000]],
+
+# DXF code của một LWPOLYLINE
+
+((-1 . <Entity name: 2cf4b78f600>) (0 . LWPOLYLINE) (330 . <Entity name: 2cf4efca1f0>) (5 . 8F0) (100 . AcDbEntity) (67 . 0) (410 . Model) (8 . 0) (100 . AcDbPolyline) 
+(90 . 10) (70 . 1) (43 . 0.0) (38 . 0.0) (39 . 0.0) 
+(10 1711.7 143.989) (40 . 0.0) (41 . 0.0) (42 . 1.0) (91 . 0) 
+(10 1711.7 193.989) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(10 1411.7 193.989) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(10 1411.7 373.989) (40 . 0.0) (41 . 0.0) (42 . -1.0) (91 . 0) 
+(10 1561.7 373.989) (40 . 0.0) (41 . 0.0) (42 . 1.0) (91 . 0) 
+(10 1711.7 373.989) (40 . 0.0) (41 . 0.0) (42 . -1.0) (91 . 0) 
+(10 1861.7 373.989) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(10 1861.7 -126.011) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(10 866.607 -126.011) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(10 866.607 143.989) (40 . 0.0) (41 . 0.0) (42 . 0.0) (91 . 0) 
+(210 0.0 0.0 1.0))
+
+# Chuyển từ DXF trên sang Object ta được 
+
+
+# Đối tượng chủ chôt
+## Line >>> Hướng, kích thước
+## Polyline >>> Contour, kích thước
+## Arc >>> Bán kính, hướng quay.
+## Block >>> Định nghĩa nội bộ trong mỗi block cho các thông tin trên.
+## Insert >>> Vị trí của các block chứa thông tin. Ánh xạ Object Name của Insert lên Block sẽ lấy được thông tin định nghĩa cho từng Insert với nội dung chi tiết.
+## Layer >>> Phân loại thông tin bé hơn. vd: Door Frame thì có DoorFrame.DIM

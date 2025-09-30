@@ -1,0 +1,414 @@
+{
+  "LWPOLYLINE": {
+    "source": "Autodesk DXF Reference – LWPOLYLINE",
+    "codes": {
+      "0": "Entity type = LWPOLYLINE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbPolyline)",
+      "8": "Layer name",
+      "90": "Number of vertices",
+      "70": "Polyline flags (1=closed, 128=plinegen, etc.)",
+      "38": "Elevation",
+      "39": "Thickness",
+      "10": "Vertex X,Y (with optional Z in DXF R2010+)",
+      "40": "Start width",
+      "41": "End width",
+      "42": "Bulge (arc factor = tan(theta/4))",
+      "210": "Normal vector"
+    }
+  },
+  "POLYLINE": {
+    "source": "Autodesk DXF Reference – POLYLINE (legacy) & VERTEX",
+    "codes": {
+      "0": "Entity type = POLYLINE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDb2dPolyline/AcDb3dPolyline)",
+      "8": "Layer",
+      "66": "Entities follow flag (1 means VERTEX/SEQEND follow)",
+      "70": "Polyline flags (1=closed, 8=3D polyline, 16=3D polygon mesh, 64=polyface mesh, etc.)",
+      "10": "Default start point (rarely used for 2D)",
+      "210": "Normal vector",
+      "VERTEX.0": "Following VERTEX entities",
+      "VERTEX.70": "Vertex flags (1=extra vertex created by curve-fitting, 32=curve-fit tangent defined, 64=spline vertex, etc.)",
+      "VERTEX.10": "Vertex X",
+      "VERTEX.20": "Vertex Y",
+      "VERTEX.30": "Vertex Z",
+      "VERTEX.42": "Bulge (for 2D polyline segments)",
+      "SEQEND.0": "Terminator entity (SEQEND)"
+    }
+  },
+  "LINE": {
+    "source": "Autodesk DXF Reference – LINE",
+    "codes": {
+      "0": "Entity type = LINE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbLine)",
+      "8": "Layer",
+      "10": "Start point X,Y,Z",
+      "11": "End point X,Y,Z",
+      "39": "Thickness",
+      "210": "Extrusion direction (normal)"
+    }
+  },
+  "ARC": {
+    "source": "Autodesk DXF Reference – ARC",
+    "codes": {
+      "0": "Entity type = ARC",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbCircle/AcDbArc)",
+      "8": "Layer",
+      "10": "Center point X,Y,Z",
+      "40": "Radius",
+      "50": "Start angle (degrees)",
+      "51": "End angle (degrees)",
+      "39": "Thickness",
+      "210": "Extrusion direction"
+    }
+  },
+  "CIRCLE": {
+    "source": "Autodesk DXF Reference – CIRCLE",
+    "codes": {
+      "0": "Entity type = CIRCLE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbCircle)",
+      "8": "Layer",
+      "10": "Center point X,Y,Z",
+      "40": "Radius",
+      "39": "Thickness",
+      "210": "Extrusion direction"
+    }
+  },
+  "ELLIPSE": {
+    "source": "Autodesk DXF Reference – ELLIPSE",
+    "codes": {
+      "0": "Entity type = ELLIPSE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbEllipse)",
+      "8": "Layer",
+      "10": "Center point",
+      "11": "Endpoint of major axis relative to center",
+      "40": "Ratio of minor axis to major axis",
+      "41": "Start parameter (radians)",
+      "42": "End parameter (radians)",
+      "210": "Extrusion direction"
+    }
+  },
+  "SPLINE": {
+    "source": "Autodesk DXF Reference – SPLINE",
+    "codes": {
+      "0": "Entity type = SPLINE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbSpline)",
+      "8": "Layer",
+      "210": "Extrusion direction",
+      "70": "Spline flag (fit/simple, closed, periodic, rational, planar)",
+      "71": "Degree of the spline curve",
+      "72": "Number of knots",
+      "73": "Number of control points",
+      "74": "Number of fit points",
+      "40[]": "Knot values (multiple)",
+      "10[]": "Control points (multiple)",
+      "41[]": "Weights (multiple, optional)",
+      "11[]": "Fit points (multiple, optional)",
+      "42": "Knot tolerance",
+      "43": "Control-point tolerance",
+      "44": "Fit tolerance"
+    }
+  },
+  "POINT": {
+    "source": "Autodesk DXF Reference – POINT",
+    "codes": {
+      "0": "Entity type = POINT",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbPoint)",
+      "8": "Layer",
+      "10": "Position X,Y,Z",
+      "39": "Thickness",
+      "50": "Angle of the X axis relative to the UCS for the point display",
+      "210": "Extrusion direction"
+    }
+  },
+  "INSERT": {
+    "source": "Autodesk DXF Reference – INSERT",
+    "codes": {
+      "0": "Entity type = INSERT",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbBlockReference)",
+      "8": "Layer",
+      "2": "Block name",
+      "10": "Insertion point X,Y,Z",
+      "41": "X scale factor",
+      "42": "Y scale factor",
+      "43": "Z scale factor",
+      "50": "Rotation angle",
+      "66": "Attributes-follow flag (1 means ATTRIB entities follow)",
+      "70": "Column count (MINSERT)",
+      "71": "Row count (MINSERT)",
+      "44": "Column spacing (MINSERT)",
+      "45": "Row spacing (MINSERT)"
+    }
+  },
+  "ATTRIB": {
+    "source": "Autodesk DXF Reference – ATTRIB",
+    "codes": {
+      "0": "Entity type = ATTRIB",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbText, AcDbAttribute)",
+      "8": "Layer",
+      "10": "Insertion point",
+      "1": "Attribute text",
+      "2": "Attribute tag",
+      "3": "Attribute prompt",
+      "7": "Text style name",
+      "40": "Text height",
+      "50": "Rotation angle",
+      "41": "Relative X scale factor",
+      "51": "Oblique angle",
+      "70": "Attribute flags (invisible, constant, verify, preset)",
+      "280": "Lock position flag"
+    }
+  },
+  "ATTDEF": {
+    "source": "Autodesk DXF Reference – ATTDEF",
+    "codes": {
+      "0": "Entity type = ATTDEF",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbText, AcDbAttributeDefinition)",
+      "8": "Layer",
+      "10": "Insertion point",
+      "1": "Default value (text)",
+      "2": "Attribute tag",
+      "3": "Prompt string",
+      "7": "Text style name",
+      "40": "Text height",
+      "50": "Rotation angle",
+      "41": "Relative X scale factor",
+      "51": "Oblique angle",
+      "70": "Attribute flags (invisible, constant, verify, preset)"
+    }
+  },
+  "DIMENSION": {
+    "source": "Autodesk DXF Reference – DIMENSION",
+    "codes": {
+      "0": "Entity type = DIMENSION",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbDimension)",
+      "8": "Layer",
+      "2": "Dimension style name",
+      "10": "Definition point (DXF: X of first definition point)",
+      "11": "Text middle point (DXF: X of text point)",
+      "12": "Insertion point for clones / alternate uses",
+      "13": "Definition point 2",
+      "14": "Definition point 3 (for some types)",
+      "70": "Dimension type (bit-coded)",
+      "1": "Dimension text",
+      "71": "Attachment point",
+      "72": "Text line spacing style",
+      "41": "Text line spacing factor",
+      "42": "Actual measurement (optional)",
+      "50": "Angle (for angular types)",
+      "210": "Extrusion direction"
+    }
+  },
+  "LEADER": {
+    "source": "Autodesk DXF Reference – LEADER",
+    "codes": {
+      "0": "Entity type = LEADER",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbLeader)",
+      "8": "Layer",
+      "3": "Arrowhead block name (optional)",
+      "71": "Leader creation flag (annotation, spline, etc.)",
+      "72": "Leader path type (straight/spline)",
+      "73": "Hook line direction flag",
+      "74": "Hook line flag",
+      "75": "Text annotation height",
+      "76": "Text annotation width",
+      "76*": "Note: codes 10/20/30 repeat for each leader vertex",
+      "10[]": "Leader vertices (X)",
+      "210": "Extrusion direction"
+    }
+  },
+  "MLEADER": {
+    "source": "Autodesk DXF Reference – MULTILEADER (MLEADER)",
+    "codes": {
+      "0": "Entity type = MLEADER",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbMLeader)",
+      "8": "Layer",
+      "10[]": "Leader line vertices (block of data)",
+      "40": "Text height (if text content)",
+      "41": "Scale",
+      "71": "Content type",
+      "72": "Text attachment direction",
+      "90": "Leader line count",
+      "210": "Extrusion direction"
+    }
+  },
+  "HATCH": {
+    "source": "Autodesk DXF Reference – HATCH",
+    "codes": {
+      "0": "Entity type = HATCH",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbHatch)",
+      "8": "Layer",
+      "2": "Pattern name",
+      "70": "Solid fill flag (1=solid)",
+      "71": "Associativity flag",
+      "91": "Loop count",
+      "92": "Loop type",
+      "72": "Edge type (line/arc/ellipse/spline)",
+      "10[]": "Seed points (X)",
+      "41": "Pattern scale",
+      "52": "Pattern angle",
+      "75": "Hatch style",
+      "76": "Pattern type",
+      "47": "Pattern line spacing",
+      "42": "Edge bulge (for polyline loop)"
+    }
+  },
+  "SOLID": {
+    "source": "Autodesk DXF Reference – SOLID",
+    "codes": {
+      "0": "Entity type = SOLID",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbTrace/Solid)",
+      "8": "Layer",
+      "10": "First corner (X,Y,Z)",
+      "11": "Second corner",
+      "12": "Third corner",
+      "13": "Fourth corner",
+      "39": "Thickness",
+      "210": "Extrusion direction"
+    }
+  },
+  "TRACE": {
+    "source": "Autodesk DXF Reference – TRACE",
+    "codes": {
+      "0": "Entity type = TRACE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbTrace)",
+      "8": "Layer",
+      "10": "First corner",
+      "11": "Second corner",
+      "12": "Third corner",
+      "13": "Fourth corner",
+      "39": "Thickness",
+      "210": "Extrusion direction"
+    }
+  },
+  "3DFACE": {
+    "source": "Autodesk DXF Reference – 3DFACE",
+    "codes": {
+      "0": "Entity type = 3DFACE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbFace)",
+      "8": "Layer",
+      "10": "First corner X,Y,Z",
+      "11": "Second corner X,Y,Z",
+      "12": "Third corner X,Y,Z",
+      "13": "Fourth corner X,Y,Z (optional)",
+      "70": "Edge visibility flags",
+      "210": "Extrusion direction"
+    }
+  },
+  "XLINE": {
+    "source": "Autodesk DXF Reference – XLINE",
+    "codes": {
+      "0": "Entity type = XLINE",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbXline)",
+      "8": "Layer",
+      "10": "Base point",
+      "11": "Unit direction vector",
+      "210": "Extrusion direction"
+    }
+  },
+  "RAY": {
+    "source": "Autodesk DXF Reference – RAY",
+    "codes": {
+      "0": "Entity type = RAY",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbRay)",
+      "8": "Layer",
+      "10": "Base point",
+      "11": "Direction vector",
+      "210": "Extrusion direction"
+    }
+  },
+  "MTEXT": {
+    "source": "Autodesk DXF Reference – MTEXT",
+    "codes": {
+      "0": "Entity type = MTEXT",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbMText)",
+      "8": "Layer",
+      "10": "Insertion point",
+      "40": "Text height",
+      "1": "Text string",
+      "50": "Rotation angle",
+      "41": "Reference rectangle width",
+      "71": "Attachment point",
+      "72": "Drawing direction",
+      "7": "Text style name",
+      "210": "Extrusion direction"
+    }
+  },
+  "TEXT": {
+    "source": "Autodesk DXF Reference – TEXT",
+    "codes": {
+      "0": "Entity type = TEXT",
+      "5": "Handle",
+      "330": "Owner handle",
+      "100": "Subclass markers (AcDbEntity, AcDbText)",
+      "8": "Layer",
+      "10": "Insertion point",
+      "40": "Text height",
+      "1": "Text string",
+      "50": "Rotation angle",
+      "41": "Relative X scale factor (width)",
+      "51": "Oblique angle",
+      "7": "Text style name",
+      "72": "Horizontal justification",
+      "73": "Vertical justification",
+      "210": "Extrusion direction"
+    }
+  },
+  "BLOCK": {
+    "source": "Autodesk DXF Reference – BLOCK/ENDBLK",
+    "codes": {
+      "0": "Entity type = BLOCK",
+      "5": "Handle",
+      "330": "Owner (Block Table Record)",
+      "100": "Subclass markers (AcDbEntity, AcDbBlockBegin)",
+      "8": "Layer",
+      "2": "Block name",
+      "70": "Block type flags",
+      "10": "Base point",
+      "3": "Xref path name (optional)",
+      "1": "Block description (optional)",
+      "ENDBLK": "Terminator entity"
+    }
+  }
+}

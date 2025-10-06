@@ -61,9 +61,28 @@
           ;else
             (progn (prompt "\n; 'lisp->json' error: invalid json object") (exit))
           );if
-        ;else
+        ;else đoạn này sửa thành dạng {"key" : [value, value, value]}, sử dụng handle làm "key"
           (setq str (mapcar '(lambda (x) (strcat "," (_lisp->json p x))) e)
-                str (apply 'append (list '("[") (list (substr (car str) 2)) (cdr str) '("]")))
+                ;str (apply 'append (list '("[") (list (substr (car str) 2)) (cdr str) '("]")))
+                
+                str (if (and (eq 'STR (type(car (list (substr (car str) 2))))) (atom (car (list (substr (car str) 2))))) ;(and (atom a) (vl-stringp a))
+                      
+                (apply 'append (list  (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("{"))
+									  (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("{")) 
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") (list (chop-right (substr (car str) 13) 1)))
+                                      (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) (list (substr (car str) 2)))
+                                      '(":") 
+                                      '("[") 
+                                      (list (substr (car (cdr str)) 2)) 
+                                      (cdr (cdr str)) 
+                                      '("]") 
+                                      ;(if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("}"))
+                                       '("}")
+                               ))
+                      
+                ;Trường hợp mới 
+                (apply 'append (list '("[") (list (substr (car str) 2)) (cdr str) '("]"))) ; Trường hợp cũ
+                )
                 str (apply 'strcat str))
         );if
       )
@@ -83,6 +102,15 @@
   );if
 )
 
+(defun chop-right (s n / len)
+  (setq len (strlen s))
+  (cond
+    ((<= n 0) s)
+    ((> len n) (substr s 1 (- len n)))
+    (T ""))
+)
+  
+  
 ;[{"-1":"B1BF"},{"0":"MTEXT"},{"330":"AACF"},{"5":"B1BF"},{"100":"AcDbEntity"},{"67":0},{"410":"Model"},{"8":"EMPLOYEE"},{"370":-3},{"100":"AcDbMText"},["10",1434.872766197735,3309.867400197119,0.000000000000000],{"40":6.000000000000000},{"41":24.87585266030014},{"46":0.000000000000000},{"71":1},{"72":5},{"1":"\\A1;Robert\\PNelson"},{"7":"ARCHITXT"},["210",0.000000000000000,0.000000000000000,1.000000000000000],["11",1.000000000000000,0.000000000000000,0.000000000000000],{"42":28.00000000000001},{"43":16.00000000000000},{"50":0.000000000000000},{"73":1},{"44":1.000000000000000}],
 ;[{"EntName":"B1BF"},{"EntType":"MTEXT"},{"330":"AACF"},{"EntHandle":"B1BF"},{"SubClass":"AcDbEntity"},{"EntSpace":0},{"Layout":"Model"},{"Layer":"EMPLOYEE"},{"370":-3},{"SubClass":"AcDbMText"},["RefPoint",1434.872766197735,3309.867400197119,0.000000000000000],{"Size":6.000000000000000},{"ScaleX_StartA":24.87585266030014},{"ElemScale":0.000000000000000},{"Attach_Degree_Assoc":1},{"Direction":5},{"TextString":"\\A1;Robert\\PNelson"},{"TextStyle":"ARCHITXT"},["ExtrusionVec",0.000000000000000,0.000000000000000,1.000000000000000],["SecondPoint",1.000000000000000,0.000000000000000,0.000000000000000],{"ScaleY_EndA":28.00000000000001},{"ScaleZ":16.00000000000000},{"Rotation_StartA":0.000000000000000},{"Spacing_Len":1},{"OffsetX_LineSp":1.000000000000000}],
 (defun write-JSON (edata file delimit / str) ; write JSON line
@@ -106,24 +134,30 @@
 )
 
 (defun JSONoutTbl ( tname / a ent)
- (write-line (strcat "[\n\"" tname "\",") file)
+ (write-line (strcat "\"" tname "\"" ":" "[") file)
  (while
   (setq a (tblnext tname (null a))) ; BLOCK, LAYER....
    (if (not (and (= tname "BLOCK") (>= (cdr (assoc 70 a)) 4))) ; no block xrefs
      (progn
        (setq ent (tblobjname tname (cdr (assoc 2 a))))
 ;(PRINT (entget ent))
+       ;add start block
+       (if (= tname "BLOCK")(write-line (strcat "{" "\"" (vl-princ-to-string (cdr (assoc 2 a))) "\"" ":" "[")  file))
        (write-JSON (entget ent) file T)
        (while
         (setq ent (entnext ent))
 ;(PRINT (entget ent))
+        (if (entnext ent)
         (write-JSON (entget ent) file T)
+		(write-JSON (entget ent) file nil)
+		)
        )
-       (if (= tname "BLOCK")(write-JSON '((0 . "ENDBLK") (100 . "AcDbBlockEnd") (8 . "0")) file T))
+       (if (= tname "BLOCK")(write-line "]}," file))
      )
    )
  );while
- (write-line (strcat "\"END" tname "\"\n],") file)
+ (write-line "]," file)
+;(write-line (strcat "\"END" tname "\"\n],") file)
 )
 
 ;--START Export--
@@ -141,7 +175,7 @@
 ;OBJ.TABLES?
    (initget "Yes No")
    (setq aux (getkword "\nInclude def. tables (layers, blocks, linetypes...) [Yes/No] <No>: "))
-   (write-line "[" file) ; JSON start array
+   (write-line "{" file) ; JSON start array
    (if (= aux "Yes")(progn
    (princ "\nExporting def. tables...")
     (JSONoutTbl "BLOCK")
@@ -154,16 +188,25 @@
    ))
 
    (setq i -1)
-   (write-line "[\n\"ENTITIES\"," file) ; JSON start array
+   (write-line "\"ENTITIES\":[" file) ; JSON start array
    (princ "\nExporting entities...")
    (while (< (setq i (1+ i)) (sslength ss)) ; all selected
      (setq ent (ssname ss i))
-     (write-JSON (setq edata (entget ent)) file T) ; simple entity
+     
+     (if (equal (+ 1 i) (sslength ss))
+     (write-JSON (setq edata (entget ent)) file nil)
+	 (write-JSON (setq edata (entget ent)) file T)
+     ); simple entity
+     
      (if (and (= (dxf edata 0) "INSERT") ; BLOCK?
               (= (dxf edata 66) 1))(progn ; attributes follows - nested
       (setq ent (entnext ent))
       (while ent
-       (write-JSON (setq edata (entget ent)) file T)
+        (if (entnext ent)
+		 (write-JSON (setq edata (entget ent)) file T)
+		 (write-JSON (setq edata (entget ent)) file nil)
+		)
+       ;(write-JSON (setq edata (entget ent)) file T)
        (if (= (dxf edata 0) "SEQEND")
          (setq ent nil)
          (setq ent (entnext ent))
@@ -182,7 +225,7 @@
       );while attr
      ));POLYLINE
    );while
-   (write-line "\"ENDENTITIES\"\n]\n]" file) ; JSON end array
+   (write-line "\n]}" file) ; JSON end object
    (close file)
    (princ (strcat "\n" (itoa i) " entit" (if (> i 1) "ies" "y") " exported to " filepath))
   )); file

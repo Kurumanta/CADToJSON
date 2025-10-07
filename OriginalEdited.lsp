@@ -134,7 +134,7 @@
 )
 
 (defun JSONoutTbl ( tname / a ent)
- (write-line (strcat "\"" tname "\"" ":" "[") file)
+ (write-line (strcat "\"" tname "\"" ":[" ) file)
  (while
   (setq a (tblnext tname (null a))) ; BLOCK, LAYER....
    (if (not (and (= tname "BLOCK") (>= (cdr (assoc 70 a)) 4))) ; no block xrefs
@@ -143,7 +143,7 @@
 ;(PRINT (entget ent))
        ;add start block
        (if (= tname "BLOCK")(write-line (strcat "{" "\"" (vl-princ-to-string (cdr (assoc 2 a))) "\"" ":" "[")  file))
-       (write-JSON (entget ent) file T)
+       (if (entnext ent) (write-JSON (entget ent) file T))
        (while
         (setq ent (entnext ent))
 ;(PRINT (entget ent))
@@ -152,7 +152,7 @@
 		(write-JSON (entget ent) file nil)
 		)
        )
-       (if (= tname "BLOCK")(write-line "]}," file))
+       (if (= tname "BLOCK") (if (tblnext tname (null a)) (write-line "]}," file)(write-line "]}" file)))
      )
    )
  );while

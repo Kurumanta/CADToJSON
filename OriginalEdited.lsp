@@ -68,7 +68,7 @@
                 str (if (and (eq 'STR (type(car (list (substr (car str) 2))))) (atom (car (list (substr (car str) 2))))) ;(and (atom a) (vl-stringp a))
                       
                 (apply 'append (list  (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("{"))
-									  (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("{")) 
+									                    (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("{")) 
                                       (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") (list (chop-right (substr (car str) 13) 1)))
                                       (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) (list (substr (car str) 2)))
                                       '(":") 
@@ -77,7 +77,7 @@
                                       (cdr (cdr str)) 
                                       '("]") 
                                       ;(if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("}"))
-                                       '("}")
+                                      '("}")
                                ))
                       
                 ;Trường hợp mới 
@@ -133,26 +133,33 @@
  (cdr (assoc code e))
 )
 
-(defun JSONoutTbl ( tname / a ent)
+(defun JSONoutTbl ( tname / a ent first)
  (write-line (strcat "\"" tname "\"" ":[" ) file)
+ (setq first T)
  (while
   (setq a (tblnext tname (null a))) ; BLOCK, LAYER....
    (if (not (and (= tname "BLOCK") (>= (cdr (assoc 70 a)) 4))) ; no block xrefs
      (progn
+       
        (setq ent (tblobjname tname (cdr (assoc 2 a))))
+       (if (not first) (write-line "," file) (setq first nil)) ; delimit
 ;(PRINT (entget ent))
        ;add start block
        (if (= tname "BLOCK")(write-line (strcat "{" "\"" (vl-princ-to-string (cdr (assoc 2 a))) "\"" ":" "[")  file))
-       (if (entnext ent) (write-JSON (entget ent) file T))
+       (if (entnext ent) 
+         (write-JSON (entget ent) file T)
+         (write-JSON (entget ent) file nil)
+       )
        (while
         (setq ent (entnext ent))
 ;(PRINT (entget ent))
         (if (entnext ent)
-        (write-JSON (entget ent) file T)
-		(write-JSON (entget ent) file nil)
-		)
+        	(write-JSON (entget ent) file T)
+     			(write-JSON (entget ent) file nil)
+		    )
        )
-       (if (= tname "BLOCK") (if (tblnext tname (null a)) (write-line "]}," file)(write-line "]}" file)))
+       (if (= tname "BLOCK") (write-line "]}" file) ;(if (tblnext tnamecache nil) (write-line "]}," file) (write-line "]}" file))
+       )
      )
    )
  );while
@@ -179,12 +186,12 @@
    (if (= aux "Yes")(progn
    (princ "\nExporting def. tables...")
     (JSONoutTbl "BLOCK")
-    (JSONoutTbl "LAYER")
-    (JSONoutTbl "LTYPE")
-    (JSONoutTbl "STYLE")
-    (JSONoutTbl "DIMSTYLE")
-    (JSONoutTbl "VIEW")
-    (JSONoutTbl "UCS")
+    ;(JSONoutTbl "LAYER")
+    ;(JSONoutTbl "LTYPE")
+    ;(JSONoutTbl "STYLE")
+    ;(JSONoutTbl "DIMSTYLE")
+    ;(JSONoutTbl "VIEW")
+    ;(JSONoutTbl "UCS")
    ))
 
    (setq i -1)
@@ -194,8 +201,8 @@
      (setq ent (ssname ss i))
      
      (if (equal (+ 1 i) (sslength ss))
-     (write-JSON (setq edata (entget ent)) file nil)
-	 (write-JSON (setq edata (entget ent)) file T)
+      (write-JSON (setq edata (entget ent)) file nil)
+	    (write-JSON (setq edata (entget ent)) file T)
      ); simple entity
      
      (if (and (= (dxf edata 0) "INSERT") ; BLOCK?
@@ -203,9 +210,9 @@
       (setq ent (entnext ent))
       (while ent
         (if (entnext ent)
-		 (write-JSON (setq edata (entget ent)) file T)
-		 (write-JSON (setq edata (entget ent)) file nil)
-		)
+		      (write-JSON (setq edata (entget ent)) file T)
+		      (write-JSON (setq edata (entget ent)) file nil)
+      )
        ;(write-JSON (setq edata (entget ent)) file T)
        (if (= (dxf edata 0) "SEQEND")
          (setq ent nil)

@@ -57,7 +57,7 @@
                      (listp (cadr e))
                      (setq arr t)))
           (if (eq 'STR (type (car e)))
-            (strcat "{" (_lisp->json p (car e)) ":" (_lisp->json p (if arr (cadr e) (cdr e))) "}")
+            (strcat "" (_lisp->json p (car e)) ":" (_lisp->json p (if arr (cadr e) (cdr e))) "") ;thử bỏ ngoặc {} TEST
           ;else
             (progn (prompt "\n; 'lisp->json' error: invalid json object") (exit))
           );if
@@ -68,20 +68,20 @@
                 str (if (and (eq 'STR (type(car (list (substr (car str) 2))))) (atom (car (list (substr (car str) 2))))) ;(and (atom a) (vl-stringp a))
                       
                 (apply 'append (list  (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("{"))
-									                    (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("{")) 
-                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") (list (chop-right (substr (car str) 13) 1)))
+									                    (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("")) 
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") (list (chop-right (substr (car str) 2) 0))) ; Test tham số 2 0 thay vì 13 1
                                       (if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) (list (substr (car str) 2)))
-                                      '(":") 
-                                      '("[") 
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '(",") '(":")) ;'(":") ; Branch
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("") '("[")); TEST gỡ bỏ array '("[") Branch
                                       (list (substr (car (cdr str)) 2)) 
                                       (cdr (cdr str)) 
-                                      '("]") 
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("") '("]")); TEST gỡ  bỏ array '("]")  Branch
                                       ;(if (not (wcmatch (car (list (substr (car str) 2))) "*EntName*")) '("}"))
-                                      '("}")
+                                      (if (wcmatch (car (list (substr (car str) 2))) "*EntName*") '("}"))
                                ))
                       
                 ;Trường hợp mới 
-                (apply 'append (list '("[") (list (substr (car str) 2)) (cdr str) '("]"))) ; Trường hợp cũ
+                (apply 'append (list '("{") (list (substr (car str) 2)) (cdr str) '("}"))) ; Trường hợp cũ TEST thay thế ngoặc [] bằng {}.
                 )
                 str (apply 'strcat str))
         );if
